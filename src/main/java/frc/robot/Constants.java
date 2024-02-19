@@ -132,16 +132,23 @@ public final class Constants {
     
     public static final int kAcquire = 1;
     public static final int kEject = 2;
-    public static final double kManualSpeed = 1.0; 
+    public static final double kManualSpeed = .75; 
   }
     public static class shooter {
       public static final int kLeftMotorControllerId = 1;
       public static final int kRightMotorControllerId = 2; 
-      public static final int kSparkFlexCurrentLimit = 50;
+      public static final int kSparkFlexCurrentLimit = 40;
       public static final boolean kLeftIsInverted = false;
       public static final boolean kRightIsInverted = true;
     }
     public static class LogiJoy{
     
+    }
+
+    public static class indexer {
+      public static final int kIndexerMotorId = 20;
+      public static final boolean kisInverted = false;
+      public static final int kCurrentLimit = 40;
+
     }
 }
