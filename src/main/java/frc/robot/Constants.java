@@ -145,10 +145,17 @@ public final class Constants {
     
     }
 
-    public static class indexer {
-      public static final int kIndexerMotorId = 20;
-      public static final boolean kisInverted = false;
+    public static class Feeder {
+      public static final int kCANId = 20;
+      public static final boolean kIsInverted = false;
       public static final int kCurrentLimit = 40;
+      public static final int kSensorPortId = 0;
+      public static final double kSpeed = .75;
+    }
 
+    public static class Super {
+      public static final int kAcquire = 1;
+      public static final int kEject = 0;
+      public static final int kStop = 2;
     }
 }

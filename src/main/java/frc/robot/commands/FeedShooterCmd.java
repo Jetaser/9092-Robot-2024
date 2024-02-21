@@ -3,34 +3,40 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import frc.robot.subsystems.ShooterSubsystem;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.Feeder;
+import frc.robot.subsystems.FeederSubsystem;
 
-public class ShootCmd extends Command {
+public class FeedShooterCmd extends Command {
 
-  private ShooterSubsystem m_shooter; 
+  private FeederSubsystem m_feeder;
 
-  public ShootCmd(ShooterSubsystem _shooter) {
-    m_shooter = _shooter;
-    addRequirements(m_shooter);
+  public FeedShooterCmd(FeederSubsystem _feeder) {
+    m_feeder = _feeder;
+    addRequirements(m_feeder);
   }
 
+
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
+
 
   @Override
   public void execute() {
-    m_shooter.runManual();
+    m_feeder.runManual(Feeder.kSpeed);
   }
 
- 
   @Override
   public void end(boolean interrupted) {
-    m_shooter.stop();
+    m_feeder.runManual(0);
   }
+
 
   @Override
   public boolean isFinished() {
-    return false;
+    return !m_feeder.hasGamePiece();
   }
 }
