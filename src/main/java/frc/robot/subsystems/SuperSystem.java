@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.Feeder;
 import frc.robot.Constants.Intake;
 import frc.robot.Constants.Super;
 

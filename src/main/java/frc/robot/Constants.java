@@ -132,7 +132,7 @@ public final class Constants {
     
     public static final int kAcquire = 1;
     public static final int kEject = 2;
-    public static final double kManualSpeed = .75; 
+    public static final double kManualSpeed = .5; 
   }
     public static class shooter {
       public static final int kLeftMotorControllerId = 1;
@@ -141,16 +141,32 @@ public final class Constants {
       public static final boolean kLeftIsInverted = false;
       public static final boolean kRightIsInverted = true;
     }
-    public static class LogiJoy{
     
-    }
+  public static final class Buttons { //Logitech F310
+    public static final int kA = 1;
+    public static final int kB = 2;
+    public static final int kX = 3;
+    public static final int kY = 4;
+    public static final int kLB = 5;
+    public static final int kRB = 6;
+    public static final int kBack = 7;
+    public static final int kStart = 8;
+    public static final int kLeftJoyIn = 9;
+    public static final int kRightJoyIn = 10;
+
+    //Directional pad values for .getPOV()
+    public static final int kDUp = 0;
+    public static final int kDRight = 90;
+    public static final int kDDown = 180;
+    public static final int kDLeft = 270;
+  }
 
     public static class Feeder {
       public static final int kCANId = 20;
       public static final boolean kIsInverted = false;
       public static final int kCurrentLimit = 40;
       public static final int kSensorPortId = 0;
-      public static final double kSpeed = .75;
+      public static final double kSpeed = 1.0;
     }
 
     public static class Super {
