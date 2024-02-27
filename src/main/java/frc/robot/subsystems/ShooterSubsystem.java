@@ -17,7 +17,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private RelativeEncoder m_leftEncoder = m_leftMotor.getEncoder();
   private RelativeEncoder m_rightEncoder = m_rightMotor.getEncoder();
 
-  private double m_setpoint = 0;
+  private double m_setpoint = 0.0;
+  private double m_leftSetpoint = 0;
+  private double m_rightSetpoint = 0;
 
   public ShooterSubsystem() {
     m_leftMotor.restoreFactoryDefaults();
@@ -30,7 +32,8 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightMotor.setInverted(shooter.kRightIsInverted);
     m_rightMotor.setIdleMode(IdleMode.kCoast);
 
-    SmartDashboard.putNumber("Setpoint", m_setpoint);
+    SmartDashboard.putNumber("Left Setpoint", m_leftSetpoint);
+    SmartDashboard.putNumber("Right Setpoint", m_rightSetpoint);
   }
 
   public void runManual () {
@@ -38,6 +41,11 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightMotor.setVoltage(12.0 * m_setpoint / 6784.0 + 12 * .0002 * (m_setpoint - m_rightEncoder.getVelocity()));
   }
 
+
+  public void setSetpoint(double _setpoint){
+    m_setpoint = _setpoint;
+
+  }
   public void stop() {
     m_leftMotor.setVoltage(0);
     m_rightMotor.setVoltage(0);
@@ -45,7 +53,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_setpoint = SmartDashboard.getNumber("Setpoint", 0);
+    runManual();
+    m_leftSetpoint = SmartDashboard.getNumber("Left Setpoint", 0);
+    m_rightSetpoint = SmartDashboard.getNumber("Right Setpoint", 0);
+
     SmartDashboard.putNumber("Left RPM", m_leftEncoder.getVelocity());
     SmartDashboard.putNumber("Right RPM", m_rightEncoder.getVelocity());
   }

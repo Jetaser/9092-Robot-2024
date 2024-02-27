@@ -6,11 +6,11 @@ package frc.robot.commands;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class RunShooterCmd extends Command {
+public class StopShooterCmd extends Command {
 
   private ShooterSubsystem m_shooter; 
 
-  public RunShooterCmd(ShooterSubsystem _shooter) {
+  public StopShooterCmd(ShooterSubsystem _shooter) {
     m_shooter = _shooter;
     addRequirements(m_shooter);
   }
@@ -20,7 +20,7 @@ public class RunShooterCmd extends Command {
 
   @Override
   public void execute() {
-    m_shooter.setSetpoint(2300);
+    m_shooter.setSetpoint(0);
   }
 
  

@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.574959003230197,
-      "y": 4.111991050457275
+      "x": 1.3617289206409402,
+      "y": 6.476385904471273
     },
     "rotation": 0
   },
@@ -18,7 +18,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Super Path"
+                  "pathName": "test path 24"
                 }
               },
               {
@@ -28,12 +28,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
           }
         },
         {

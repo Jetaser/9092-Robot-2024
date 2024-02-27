@@ -204,7 +204,13 @@ public class DriveSubsystem extends SubsystemBase {
     double xSpeedCommanded;
     double ySpeedCommanded;
     
-    if(autoAlign) {rot = -0.01 * x;}
+    if(autoAlign) {
+      rot = -0.01 * x;
+      if( y != 0 ) {
+       xSpeed = .1 * (y + 10.5);
+      }
+      ySpeed = 0;
+    }
 
     if (rateLimit) {
       // Convert XY to polar for rate limiting

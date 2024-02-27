@@ -15,6 +15,7 @@ import frc.robot.Constants.Super;
 import frc.robot.commands.FeedShooterCmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.RunShooterCmd;
+import frc.robot.commands.StopShooterCmd;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -39,19 +40,21 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    autoChooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("Auto Chooser", autoChooser);
     NamedCommands.registerCommand("FeedShooter", new FeedShooterCmd(m_feeder));
     NamedCommands.registerCommand("Intake", new IntakeCmd(m_super, Super.kAcquire));
     NamedCommands.registerCommand("RunShooter", new RunShooterCmd(m_shooter));
+    NamedCommands.registerCommand("StopShooter", new StopShooterCmd(m_shooter));
+
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Chooser", autoChooser);
 
 
     m_robotDrive.setDefaultCommand(
       new RunCommand(
         () -> m_robotDrive.drive(
-        -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
-        -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
-        -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
+        -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband * 0.5),
+        -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband * 0.5),
+        -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband * 0.1),
         false, true, true),
         m_robotDrive));
 
@@ -73,19 +76,25 @@ public class RobotContainer {
 
     new JoystickButton(m_operatorController, Buttons.kA).whileTrue(new IntakeCmd(m_super, Super.kAcquire));
     new JoystickButton(m_operatorController, Buttons.kB).whileTrue(new IntakeCmd(m_super, Super.kEject));
-    new JoystickButton(m_operatorController, Buttons.kY).toggleOnTrue(new RunShooterCmd(m_shooter));
-    new JoystickButton(m_operatorController, Buttons.kX).toggleOnFalse(new RunShooterCmd(m_shooter));
+    new JoystickButton(m_operatorController, Buttons.kY).onTrue( new StopShooterCmd(m_shooter));
+    new JoystickButton(m_operatorController, Buttons.kX).onTrue(new RunShooterCmd(m_shooter));
     new JoystickButton(m_operatorController, Buttons.kLB).whileTrue(new FeedShooterCmd(m_feeder));
 
-    new JoystickButton(m_operatorController, Buttons.kRB).whileTrue(
+    new JoystickButton(m_driverController, Buttons.kRB).whileTrue(
             new RunCommand(
         () -> m_robotDrive.drive(
-        -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband),
-        -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband),
-        -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband),
-        true, true, true),
+        -MathUtil.applyDeadband(m_driverController.getLeftY(), OIConstants.kDriveDeadband * 0.5),
+        -MathUtil.applyDeadband(m_driverController.getLeftX(), OIConstants.kDriveDeadband * 0.5),
+        -MathUtil.applyDeadband(m_driverController.getRightX(), OIConstants.kDriveDeadband * 0.1),
+        true, false, true),
         m_robotDrive)); 
+
+
   }
 
-  public Command getAutonomousCommand() {return autoChooser.getSelected();}
+  public Command getAutonomousCommand() {
+  
+    
+    return autoChooser.getSelected();
+  }
 }

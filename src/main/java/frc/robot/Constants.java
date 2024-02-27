@@ -94,7 +94,7 @@ public final class Constants {
     public static final IdleMode kDrivingMotorIdleMode = IdleMode.kBrake;
     public static final IdleMode kTurningMotorIdleMode = IdleMode.kBrake;
 
-    public static final int kDrivingMotorCurrentLimit = 50; // amps
+    public static final int kDrivingMotorCurrentLimit = 40; // amps
     public static final int kTurningMotorCurrentLimit = 20; // amps
   }
 
@@ -132,7 +132,8 @@ public final class Constants {
     
     public static final int kAcquire = 1;
     public static final int kEject = 2;
-    public static final double kManualSpeed = .5; 
+    public static final double kManualSpeed = .5;
+
   }
     public static class shooter {
       public static final int kLeftMotorControllerId = 1;
